@@ -51,8 +51,9 @@ contract Project is ProjectStatus {
     }
     
     function withdrawFees(address addr, uint256 serviceFee)public onlyOwner returns (bool){
-        require(addr.balance > GOAL[addr], "the project hasn't reached the goal yet :/");
+        require(addr.balance > GOAL[addr], "your project hasn't reached the goal yet :/");
+        uint256 serviceFee = GOAL[addr] * 1 / 3;
         msg.sender.transfer(serviceFee);
-        return true;
+        return serviceFee;
     }
 }
