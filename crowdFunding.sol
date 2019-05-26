@@ -50,9 +50,9 @@ contract Project is ProjectStatus {
         }
     }
     
-    function withdrawFunds(address addr)public returns (bool){
-        require(addr.balance == GOAL[addr], "your project hasn't reached the goal yet :/");
-        msg.sender.transfer(addr.balance);
+    function withdrawFees(address addr, uint256 serviceFee)public onlyOwner returns (bool){
+        require(addr.balance > GOAL[addr], "the project hasn't reached the goal yet :/");
+        msg.sender.transfer(serviceFee);
         return true;
     }
 }
